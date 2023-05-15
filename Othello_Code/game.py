@@ -29,7 +29,7 @@ class Game:
             state = state.applyMoveCloning(move)
             states.append(state)
             # util.pprint(state)
-            player_index = (player_index + 1) % len(self.players)
+            player_index = (player_index + 1) % len(self.players) # Swithcing the players
         
         print("\n*** Final winner: " + state.winner() +" ***" )
         print(state)

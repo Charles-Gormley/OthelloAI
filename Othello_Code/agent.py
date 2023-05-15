@@ -18,7 +18,17 @@ class HumanPlayer(game.Player):
         return moves[int(response)]
 
 class RandomAgent(game.Player):
-    pass
+    def __init__(self):
+        super().__init__()
+
+    def choose_move(self, state):
+
+        moves = state.generateMoves()
+
+        try: 
+            return random.choice(moves)
+        except:
+            return None
 
 
 class MinimaxAgent(game.Player):

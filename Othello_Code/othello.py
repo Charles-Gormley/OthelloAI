@@ -116,8 +116,6 @@ class State:
                                     moveFound = True
                                     moves.append(OthelloMove(player, i, j))
         return moves
-
-
      
     # Modifies the game state as for applying the given 'move'
     # Notice that move can be "null", which means that the player passes.
