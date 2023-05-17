@@ -42,5 +42,3 @@ if __name__ == '__main__':
     game = game.Game(initial_state, player1, player2)
 
     game.play()
-
-    
