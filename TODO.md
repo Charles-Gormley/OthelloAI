@@ -7,7 +7,11 @@
 * [x] = Minimax Agent - Run at depth of 1. max
 * [x] = Minimax Agent - run at depth of 2 min 
 * [x] = Minimax Agent - run at multiple depths
-* [ ] = Minimax Agent - Samples of Different Depth Levels in a ipynb
 * [ ] = Minimax Agent - Optimize Data Structures
 
 # Minimax + Alpha Beta Pruning.
+* [ ] = Optimize Data Structures
+
+# Testing
+* [ ] = Samples of Different Depth Levels in a ipynb
+* [ ] = Test Edge Cases
