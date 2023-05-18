@@ -40,7 +40,6 @@ class MinimaxAgent(game.Player):
     def choose_move(self, state:State):
 
         moves = state.generateMoves()
-        print("Move Length:", len(moves))
         if not moves:
             return None
         elif len(moves) == 1:
@@ -48,21 +47,18 @@ class MinimaxAgent(game.Player):
         
         # Getting if the player is maximizing or not.
         maximizing_player = not state.nextPlayerToMove
-        moves = state.generateMoves()
         
         _, best_move = self.minimax_recursion(self.max_depth, state, maximizing_player, moves)
 
+
         if best_move == None:
-            print("Player X Tried to pass a move wth \n\n\n\n\n")
-            print("Current Score", _)
-            _, best_move = self.minimax_recursion(1, state, maximizing_player)
-        
+            _, best_move = self.minimax_recursion(1, state, maximizing_player, moves)
+            if best_move == None:
+                return random.choice(moves)
+
         return best_move
     
     def minimax_recursion(self, depth:int, state:State, maximizing_player:bool, moves:list):
-        if depth == 0:
-            return (state.score(), None)
-        
         if state.game_over():
             score = state.score()
 
@@ -70,12 +66,16 @@ class MinimaxAgent(game.Player):
                 return (200, None)
             elif score < 0:
                 return (-200, None)
-                
-        moves = state.generateMoves()
+            else:
+                return(0, None)
+        
+        if depth == 0:
+            return (state.score(), None)
+        
+        
         
 
         if maximizing_player:
-            
             max_score = float("-inf")
             max_move = None
             for move in moves:
@@ -96,13 +96,18 @@ class MinimaxAgent(game.Player):
             return (max_score, max_move)
         
         if not maximizing_player:
-
             min_score = float("inf")
             min_move = None
             for move in moves:
+                next_state = state.applyMoveCloning(move)
+                next_state_moves = next_state.generateMoves()
+                if not next_state_moves:
+                    continue
+
                 cur_score, _ = self.minimax_recursion(depth = depth-1, 
-                                                      state = state.applyMoveCloning(move), 
-                                                      maximizing_player=True)
+                                                      state = next_state, 
+                                                      maximizing_player=True, 
+                                                      moves = next_state_moves)
                 
                 if min_score > cur_score:
                     min_score = cur_score
@@ -128,6 +133,12 @@ class AlphaBeta(game.Player):
         maximizing_player = not state.nextPlayerToMove
 
         _, best_move = self.alpha_beta_recursion(self.max_depth, state, maximizing_player, alpha = -1000, beta = 1000)
+
+        if best_move == None:
+            _, best_move = self.alpha_beta_recursion(1, state, maximizing_player, alpha=-1000, beta = 1000)
+            if best_move == None:
+                return random.choice(moves)
+
         return best_move
     
     def alpha_beta_recursion(self, depth:int, state:State, maximizing_player:bool, alpha:int, beta:int):
