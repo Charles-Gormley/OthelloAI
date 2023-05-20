@@ -68,7 +68,6 @@ class State:
     def num_empties(self):
         return sum(r.count(EMPTY) for r in self.board)
 
-
     def equals(self, state):
         return self.board == state.board
     
@@ -80,12 +79,46 @@ class State:
     def score(self):
         score = 0
         for i in range(self.boardSize):
-            for j in range(self.boardSize):
+            for j in range(self.boardSize): # TODO Speed this up. 
                 if self.board[i][j] == PLAYER1:
                     score += 1
                 if self.board[i][j] == PLAYER2:
                     score -= 1
         return score
+
+    def new_score(self):
+        score = 0
+        for i in range(self.boardSize):
+            for j in range(self.boardSize):
+                # TODO: Perhaps optimize this with a hash map.
+                player = self.board[i][j]
+                if player == 2:
+                    continue
+
+                circle_score = 0 
+
+                # DANGER SQUARE STRATEGY
+                if 2 <= i <= 5:
+                    circle_score += 1
+                if 2 <= j <= 5:
+                    circle_score += 1
+
+                # EDGE CORNER STRATEGY
+                # Edge and corner pieces values.
+                if i == 0 or i == 7:
+                    circle_score += 8
+                if j == 0 or j == 7:
+                    circle_score += 8
+                
+                if player: # This means player 1. Since 1 returns true and 2 has been removed with continue statement.
+                    score += (circle_score + 1)*-1 # Minimizer
+                
+                else:
+                    score += circle_score + 1 # Maximizer
+
+        return score
+        
+        
     
     #  Returns the list of possible moves for player 'player'
     def generateMoves(self, player = None):
@@ -162,6 +195,7 @@ class State:
         return newState
 
     def winner(self):
+        print(self.score())
         if self.score() > 0:
             return PLAYER_NAMES[PLAYER1]
         elif self.score() < 0:

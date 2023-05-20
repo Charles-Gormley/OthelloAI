@@ -33,6 +33,7 @@ class Game:
         
         print("\n*** Final winner: " + state.winner() +" ***" )
         print(state)
+        self.state = state # TODO: Continue Here and delete this LATER. THis iIS FOR TESTING ONLY 
         return states
 
 

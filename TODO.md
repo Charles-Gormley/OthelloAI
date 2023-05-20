@@ -13,5 +13,16 @@
 * [ ] = Optimize Data Structures
 
 # Testing
-* [ ] = Samples of Different Depth Levels in a ipynb
-* [ ] = Test Edge Cases
+* [x] = Samples of Different Depth Levels in a ipynb
+* [x] = Test Edge Cases
+* [ ] = Tux Testing
+* [ ] = Build out Test Environment.
+
+# Extra Credit
+* [ ] = Optimize Data Structures
+* [x] = New Evaluation Function
+* [ ] = Memoization of Alpha beta Pruning 
+* [ ] = Testing Different combinations against random in the test environment
+
+# WriteUp
+* [ ] = Write All 4 Sections

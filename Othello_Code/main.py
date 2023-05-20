@@ -36,9 +36,6 @@ if __name__ == '__main__':
     player1 = create_player(get_arg(1), depth_or_time)
     player2 = create_player(get_arg(2), depth_or_time)
 
-    # player1 = agent.HumanPlayer()
-    # player2 = agent.RandomAgent()
-
     game = game.Game(initial_state, player1, player2)
 
     game.play()
