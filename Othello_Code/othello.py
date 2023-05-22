@@ -2,12 +2,37 @@ import math
 import random
 import sys
 import copy
+from functools import lru_cache
 
 EMPTY = 2
 PLAYER1 = 0
 PLAYER2 = 1
 PLAYER_NAMES = ["O", "X", "."]
 OTHER_PLAYER = {PLAYER1:PLAYER2, PLAYER2:PLAYER1}
+
+
+def get_score(i, j, player, edge_weight=10, danger_weight=1, base_weight=1) -> int:
+    circle_score = 0 
+
+    # DANGER SQUARE STRATEGY
+    if 2 <= i <= 5:
+        circle_score += danger_weight
+    if 2 <= j <= 5:
+        circle_score += danger_weight
+
+    # EDGE CORNER STRATEGY
+    # Edge and corner pieces values.
+    if i == 0 or i == 7:
+        circle_score += edge_weight
+    if j == 0 or j == 7:
+        circle_score += edge_weight
+    
+    if player: # This means player 1. Since 1 returns true and 2 has been removed with continue statement.
+        return (circle_score + base_weight)*-1 # Minimizer
+
+    else:
+        return circle_score + base_weight # Maximizer
+
 
 class OthelloMove:
     def __init__(self, player , x , y ):
@@ -85,8 +110,9 @@ class State:
                 if self.board[i][j] == PLAYER2:
                     score -= 1
         return score
-
-    def new_score(self):
+    
+    
+    def ceg98_extra_score(self, edge_weight=10, danger_weight=1, base_weight=1):
         score = 0
         for i in range(self.boardSize):
             for j in range(self.boardSize):
@@ -95,27 +121,8 @@ class State:
                 if player == 2:
                     continue
 
-                circle_score = 0 
-
-                # DANGER SQUARE STRATEGY
-                if 2 <= i <= 5:
-                    circle_score += 1
-                if 2 <= j <= 5:
-                    circle_score += 1
-
-                # EDGE CORNER STRATEGY
-                # Edge and corner pieces values.
-                if i == 0 or i == 7:
-                    circle_score += 8
-                if j == 0 or j == 7:
-                    circle_score += 8
+                score += get_score(i, j, player, edge_weight=10, danger_weight=1, base_weight=1) 
                 
-                if player: # This means player 1. Since 1 returns true and 2 has been removed with continue statement.
-                    score += (circle_score + 1)*-1 # Minimizer
-                
-                else:
-                    score += circle_score + 1 # Maximizer
-
         return score
         
         
@@ -195,7 +202,7 @@ class State:
         return newState
 
     def winner(self):
-        print(self.score())
+        print("Final Score: ", self.score())
         if self.score() > 0:
             return PLAYER_NAMES[PLAYER1]
         elif self.score() < 0:

@@ -12,8 +12,8 @@ def create_player(arg,  depth_or_time):
         return agent.MinimaxAgent(depth_or_time)
     elif arg == 'alphabeta':
         return agent.AlphaBeta(depth_or_time)
-    elif arg == 'extra':
-        return agent.extra(depth_or_time)
+    elif arg == 'ab+':
+        return agent.AlphaBetaPlus(depth_or_time)
     else:
         agent.RandomAgent()
 
