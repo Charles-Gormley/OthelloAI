@@ -1,4 +1,7 @@
 # OthelloAI
+
+![Untitled video - Made with Clipchamp (1)](https://github.com/Charles-Gormley/OthelloAI/assets/76138796/66a6e52b-e20b-4cdd-8b72-2bcbe7e0f54b)
+
 Othello AI agent which can play Othello through minimax trees or utilizing a Markov Decision Process I trained.
 
 Video Demo: https://clipchamp.com/watch/hohux6Ai1Cp
