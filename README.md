@@ -1,5 +1,6 @@
 # OthelloAI
 Othello AI agent which can play Othello through minimax trees or utilizing a Markov Decision Process I trained.
+
 Video Demo: https://clipchamp.com/watch/hohux6Ai1Cp
 
 
