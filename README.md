@@ -12,7 +12,7 @@ https://www.youtube.com/watch?v=l-hh51ncgDI
 
 # How to Run
 1. Ensure you are working with python 3.7+
-2. Change directory into the Othello_Code file
+2. Load into OthelloAI folder.
 3. Run the python command: python main.py random random. This is two othello agents playing randomly. 
 4. The other players you can play as are. Minimax, AlphaBeta, *human* and ab+ (alpha-beta plus).
 5. When choosing minimax or alphabeta agents you can denote the level of depth they can go up to after the command. For example:

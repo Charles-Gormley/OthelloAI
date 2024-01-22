@@ -16,8 +16,17 @@ class HumanPlayer(game.Player):
 
         for i, action in enumerate(moves):
             print('{}: {}'.format(i, action))
-        response = input('Please choose a move: ')
-        return moves[int(response)]
+        
+
+        while True:   
+            try: 
+                response = input('Please choose a move: ')
+                chosen_move = moves[int(response)]
+                break
+            except:
+                print(f"The chosen move: {str(response)}. Is not a valid option please choose a valid response.")
+        
+        return chosen_move
 
 ############################## Random Agent ##############################
 class RandomAgent(game.Player):
